@@ -110,38 +110,41 @@ const questions = [
   },
 ];
 
-const questionElement = document.getElementsById("question");
-const answerButton = document.getElementsById("answer-butttons");
-const nextButton = document.getElementsById("next-btn");
+const questionElement = document.getElementById("question");
+const answerButton = document.getElementById("answer-buttons");
+const nextButton = document.getElementById("next-btn");
 
 let currentQuestionIndex = 0;
 let score = 0;
-nextButton.innerHTML = "Next";
-showQuestion();
 
-{
-  function showQuestion() {
-    resetState();
-    let currenntQuestion = questions[currentQuestionIndex];
-    let questionNo = currenntQuestionIndex + 1;
-    questionElement.innerHTML = questionNo + ". " + currenntQuestion.question;
+function startQuiz() {
+  currentQuestionIndex = 0;
+  score = 0;
+  nextButton.innerHTML = "Next";
+  showQuestion();
+}
 
-    currenntQuestion.answers.forEach((answers) => {
-      const button = document.createElement("button");
-      button.innerHTML = answers.text;
-      button.classList.add("btn");
-      answerButton.appendChild(button);
-      if (answer.correct) {
-        button.dataset.correct = answer.correct;
-      }
-      button.addEventListener("click", selectAnswer);
-    });
-  }
+function showQuestion() {
+  resetState();
+  let currenntQuestion = questions[currentQuestionIndex];
+  let questionNo = currentQuestionIndex + 1;
+  questionElement.innerHTML = questionNo + ". " + currenntQuestion.question;
+
+  currenntQuestion.answers.forEach((answers) => {
+    const button = document.createElement("button");
+    button.innerHTML = answers.text;
+    button.classList.add("btn");
+    answerButton.appendChild(button);
+    if (answers.correct) {
+      button.dataset.correct = answers.correct;
+    }
+    button.addEventListener("click", selectAnswer);
+  });
 }
 
 function resetState() {
   nextButton.style.display = "none";
-  while (answerButtons.firstChild) {
+  while (answerButton.firstChild) {
     answerButton.removeChild(answerButton.firstChild);
   }
 }
@@ -155,7 +158,7 @@ function selectAnswer(e) {
   } else {
     selectedBtn.classList.add("incorrect");
   }
-  Array.from(answerButtons.children).forEach((button) => {
+  Array.from(answerButton.children).forEach((button) => {
     if (button.dataset.correct === "true") {
       button.classList.add("correct");
     }
@@ -180,10 +183,12 @@ function handleNextButton() {
   }
 }
 
-nextButton.addEventListener("CLİCK", () => {
+nextButton.addEventListener("click", () => {
   if (currentQuestionIndex < questions.length) {
     handleNextButton();
   } else {
     startQuiz();
   }
 });
+
+startQuiz();

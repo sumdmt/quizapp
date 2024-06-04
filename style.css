@@ -83,9 +83,9 @@ body {
 }
 
 .correct {
-  background: rgb(15, 34, 15);
+  background: rgb(113, 189, 113);
 }
 
 .incorrect {
-  background: rgb(53, 6, 6);
+  background: rgb(141, 139, 139);
 }
