@@ -6,11 +6,21 @@
 }
 
 body {
-  background-color: hsl(240, 80%, 77%);
+  background: radial-gradient(
+    circle,
+    rgba(44, 48, 43, 1) 0%,
+    rgba(44, 48, 43, 1) 45%,
+    rgba(126, 145, 124, 1) 100%
+  );
 }
 
 .app {
-  background-color: rgb(49, 49, 133);
+  background: radial-gradient(
+    circle,
+    rgba(44, 48, 43, 1) 0%,
+    rgba(44, 48, 43, 1) 45%,
+    rgba(126, 145, 124, 1) 100%
+  );
   width: 90%;
   max-width: 600px;
   margin: 100px auto 0;
@@ -50,9 +60,13 @@ body {
   transition: all 0.3s;
 }
 
-.btn:hover {
+.btn:hover:not([disabled]) {
   background-color: black;
   color: white;
+}
+
+.btn:disabled {
+  cursor: no-drop;
 }
 
 #next-btn {
@@ -66,4 +80,12 @@ body {
   border-radius: 4px;
   cursor: pointer;
   display: none;
+}
+
+.correct {
+  background: rgb(15, 34, 15);
+}
+
+.incorrect {
+  background: rgb(53, 6, 6);
 }
